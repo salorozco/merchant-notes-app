@@ -1,30 +1,62 @@
-/vendor/
-node_modules/
-npm-debug.log
-yarn-error.log
+# ─────────────────────────────────────────────────────────────────────────────
+# Global
+# ─────────────────────────────────────────────────────────────────────────────
+# OS files
+.DS_Store
+Thumbs.db
 
-# Laravel 4 specific
-bootstrap/compiled.php
-app/storage/
+# Editor / IDE
+.idea/
+.vscode/
 
-# Laravel 5 & Lumen specific
-public/storage
-public/hot
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-error.log*
 
-# Laravel 5 & Lumen specific with changed public path
-public_html/storage
-public_html/hot
-
-storage/*.key
+# Environment files
 .env
-Homestead.yaml
-Homestead.json
-/.vagrant
-.phpunit.result.cache
-
-/public/build
-/storage/pail
+.env.*.local
 .env.backup
-.env.production
-.phpactor.json
-auth.json
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Laravel (./backend)
+# ─────────────────────────────────────────────────────────────────────────────
+/backend/vendor/
+/backend/node_modules/
+/backend/public/storage/
+!/backend/public/storage/.gitkeep
+
+# Laravel app-generated files
+/backend/storage/*.key
+/backend/storage/debugbar
+/backend/storage/logs/*
+!/backend/storage/logs/.gitkeep
+/backend/bootstrap/cache/*
+!/backend/bootstrap/cache/.gitkeep
+
+# PHPUnit & test artifacts
+/backend/.phpunit.result.cache
+#/backend/phpunit.xml
+/backend/phpunit.xml.dist
+
+# IDE helper
+/backend/_ide_helper.php
+/backend/_ide_helper_models.php
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Vue / Vite (./frontend)
+# ─────────────────────────────────────────────────────────────────────────────
+/frontend/node_modules/
+/frontend/dist/
+/frontend/.vite/
+# Local env overrides
+/frontend/.env.local
+/frontend/.env.*.local
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Docker
+# ─────────────────────────────────────────────────────────────────────────────
+docker-compose.override.yml
+.env.docker
