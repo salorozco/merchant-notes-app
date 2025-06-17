@@ -5,11 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Merchant extends Model
+class Note extends Model
 {
-    /** @use HasFactory<\Database\Factories\MerchantFactory> */
+    /** @use HasFactory<\Database\Factories\NoteFactory> */
     use HasFactory;
 
     /**
@@ -18,23 +17,24 @@ class Merchant extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'body',
         'user_id',
+        'merchant_id',
     ];
 
     /**
      * @return BelongsTo
      */
-    public function user()
+    public function merchant(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Merchant::class);
     }
 
     /**
-     * @return HasMany
+     * @return BelongsTo
      */
-    public function notes()
+    public function user(): BelongsTo
     {
-        return $this->hasMany(Note::class);
+        return $this->belongsTo(User::class);
     }
 }
