@@ -38,6 +38,10 @@ class MerchantController extends Controller
         ]);
     }
 
+    /**
+     * @param $userId
+     * @return JsonResponse
+     */
     public function merchantsByUser($userId): JsonResponse
     {
         $user = User::with('merchants')->findOrFail($userId);
