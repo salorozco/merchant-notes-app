@@ -25,12 +25,12 @@ class MerchantController extends Controller
     }
 
     /**
-     * @param int $id
+     * @param Merchant $merchant
      * @return JsonResponse
      */
-    public function show($id): JsonResponse
+    public function show(Merchant $merchant): JsonResponse
     {
-        $merchant = Merchant::with('user')->findOrFail($id);
+        $merchant->load('user');
 
         return response()->json([
             'status' => 'success',
@@ -39,12 +39,12 @@ class MerchantController extends Controller
     }
 
     /**
-     * @param $userId
+     * @param User $user
      * @return JsonResponse
      */
-    public function merchantsByUser($userId): JsonResponse
+    public function merchantsByUser(User $user): JsonResponse
     {
-        $user = User::with('merchants')->findOrFail($userId);
+        $user->load('merchants');
 
         return response()->json([
             'status' => 'success',

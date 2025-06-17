@@ -29,7 +29,10 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password123'),
         ]);
 
-        $this->call(MerchantSeeder::class);
+        $this->call(
+            MerchantSeeder::class,
+            NoteSeeder::class
+        );
 
     }
 }
