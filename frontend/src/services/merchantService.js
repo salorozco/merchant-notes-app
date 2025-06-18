@@ -1,25 +1,22 @@
-// src/services/merchantService.js
-
 import apiClient from './apiClient';
 
 export default {
     getMerchants() {
-        return apiClient.get('/merchants');
+        return apiClient.get('/api/merchants');
     },
     getMerchantById(id) {
-        return apiClient.get(`/merchants/${id}`);
+        return apiClient.get(`/api/merchants/${id}`);
     },
     getNotesByMerchantId(id) {
-        return apiClient.get(`/merchants/${id}/notes`);
+        return apiClient.get(`/api/merchants/${id}/notes`);
     },
     addNoteToMerchant(merchantId, noteData) {
-        return apiClient.post(`/merchants/${merchantId}/notes`, noteData);
+        return apiClient.post(`/api/merchants/${merchantId}/notes`, noteData);
     },
     updateNote(merchantId, noteId, noteData) {
-        return apiClient.put(`/merchants/${merchantId}/notes/${noteId}`, noteData);
+        return apiClient.put(`/api/merchants/${merchantId}/notes/${noteId}`, noteData);
     },
     deleteNote(merchantId, noteId) {
-        console.log(noteId)
-        return apiClient.delete(`/merchants/${merchantId}/notes/${noteId}`);
+        return apiClient.delete(`/api/merchants/${merchantId}/notes/${noteId}`);
     }
 };

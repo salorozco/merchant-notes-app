@@ -5,10 +5,7 @@ use App\Http\Controllers\NoteController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
-
+//
 Route::prefix('merchants')->controller(MerchantController::class)->group(function () {
     Route::get('/', 'index');
     Route::get('/by-user/{user}', [MerchantController::class, 'merchantsByUser']);
@@ -21,3 +18,4 @@ Route::prefix('merchants/{merchant}/notes')->controller(NoteController::class)->
         Route::put('/{note}', 'update');
         Route::delete('/{note}', 'destroy');
 });
+
