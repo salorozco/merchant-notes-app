@@ -28,8 +28,8 @@ The app is designed for quick local development using Docker and Laravel Sail.
 
 ```bash
 # Clone repo
-git clone git@github.com:your-org/merchant-notes-app.git
-cd merchant-notes-app
+git clone git@github.com:your-org/merchants-notes-app.git
+cd merchants-notes-app
 cp .env.example .env
 
 # Backend folder
