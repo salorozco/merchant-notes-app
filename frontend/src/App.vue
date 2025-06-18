@@ -8,7 +8,7 @@
         </div>
         <div class="space-x-4">
           <RouterLink to="/" class="text-gray-700 hover:text-blue-600">Home</RouterLink>
-          <RouterLink to="/login" class="text-gray-700 hover:text-blue-600">Login</RouterLink>
+<!--          <RouterLink to="/login" class="text-gray-700 hover:text-blue-600">Login</RouterLink>-->
         </div>
       </div>
     </nav>
