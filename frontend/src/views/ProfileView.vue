@@ -1,8 +1,8 @@
 <template>
   <div class="flex items-center justify-center  px-4">
-    <div class="w-full max-w-md bg-white p-6 rounded shadow">
+    <div class="w-full max-w-7xl mx-auto bg-white p-6 rounded shadow">
       <div v-if="authStore.user">
-        <h2 class="text-xl font-semibold text-center mb-4">Your Profile</h2>
+        <h2 class="text-xl font-semibold text-center mb-4">Profile</h2>
 
         <div class="mb-4">
           <p class="text-sm text-gray-700"><strong>Name:</strong> {{ authStore.user.name }}</p>
