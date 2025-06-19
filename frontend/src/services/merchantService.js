@@ -18,5 +18,8 @@ export default {
     },
     deleteNote(merchantId, noteId) {
         return apiClient.delete(`/api/merchants/${merchantId}/notes/${noteId}`);
+    },
+    getNotesByUser(userId) {
+        return apiClient.get(`/api/users/${userId}/notes`);
     }
 };

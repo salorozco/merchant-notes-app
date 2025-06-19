@@ -71,6 +71,7 @@ export default {
       this.isEditing = false;
     },
     async saveEdit() {
+      this.note.body = this.editedBody;
       this.$emit('update-note', {
         ...this.note,
         body: this.editedBody

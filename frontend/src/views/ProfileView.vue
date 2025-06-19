@@ -11,6 +11,8 @@
         <div class="mb-4">
           <p class="text-sm text-gray-700"><strong>Email:</strong> {{ authStore.user.email }}</p>
         </div>
+
+        <NoteList v-if="userNotes?.length" :notes="userNotes" />
       </div>
 
       <div v-else class="text-center text-gray-500">
@@ -26,16 +28,36 @@
 
 <script>
 import { useAuthStore } from '../stores/authStore';
+import { useMerchantStore } from "../stores/merchantStore";
 import { mapStores } from 'pinia';
+import NoteList from "../components/notes/NoteList.vue";
 
 export default {
   name: 'ProfileView',
+  components: {
+    NoteList
+  },
+  data() {
+    return {
+      showForm: false,
+      newNoteBody: '',
+      isLoading: true
+    };
+  },
   computed: {
     ...mapStores(useAuthStore),
+    userNotes() {
+      return useMerchantStore().userNotes || [];
+    }
   },
   async created() {
     if (!this.authStore.user) {
       await this.authStore.fetchUser();
+    }
+
+    if (this.authStore.user?.id) {
+      const merchantStore = useMerchantStore();
+      await merchantStore.fetchNotesByUser(this.authStore.user.id);
     }
   },
 };

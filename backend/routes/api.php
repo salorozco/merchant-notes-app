@@ -17,3 +17,5 @@ Route::prefix('merchants/{merchant}/notes')->controller(NoteController::class)->
         Route::put('/{note}', 'update');
         Route::delete('/{note}', 'destroy');
 });
+
+Route::get('/users/{user}/notes', [NoteController::class, 'notesByUser']);
