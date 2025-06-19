@@ -6,6 +6,8 @@ use App\Http\Requests\StoreNoteRequest;
 use App\Http\Resources\NoteResource;
 use App\Models\Merchant;
 use App\Models\Note;
+use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 use Illuminate\Http\Response;
@@ -63,5 +65,16 @@ class NoteController extends Controller
         $note->delete();
 
         return response()->noContent();
+    }
+
+    /**
+     * @param User $user
+     * @return AnonymousResourceCollection
+     */
+    public function notesByUser(User $user): AnonymousResourceCollection
+    {
+        return NoteResource::collection(
+            $user->notes()->with('merchant')->latest()->get()
+        );
     }
 }

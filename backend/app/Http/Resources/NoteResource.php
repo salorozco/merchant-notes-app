@@ -21,6 +21,13 @@ class NoteResource extends JsonResource
                 'id' => $this->user->id,
                 'name' => $this->user->name,
             ],
+            'merchant' => $this->whenLoaded('merchant', function () {
+                return [
+                    'id' => $this->merchant->id,
+                    'name' => $this->merchant->name,
+                    'created_at' => $this->merchant->created_at->diffForHumans(),
+                ];
+            }),
             'created_at' => $this->created_at->diffForHumans(),
         ];
     }

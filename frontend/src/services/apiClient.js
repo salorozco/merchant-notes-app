@@ -1,8 +1,9 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-    baseURL: 'http://localhost/api',
-    withCredentials: false,
+    baseURL: 'http://localhost',
+    withCredentials: true,
+    withXSRFToken: true,
     headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -10,8 +11,6 @@ const apiClient = axios.create({
 });
 
 apiClient.interceptors.request.use((config) => {
-    // console.log(`Making request to: ${config.baseURL}${config.url}`);
-    config.headers['Access-Control-Allow-Origin'] = '*';
     return config;
 });
 
