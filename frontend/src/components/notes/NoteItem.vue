@@ -5,14 +5,16 @@
       <p class="text-gray-700">{{ note.body }}</p>
       <p class="text-sm text-gray-500 mt-2">Created: {{ note.created_at }}</p>
 
-      <div class="mt-4 flex items-center">
+      <div class="mt-4 flex items-center" v-if="canUpdateNotes || canDeleteNotes">
         <button
+            v-if="canUpdateNotes"
             @click="startEdit"
             class="bg-blue-500 text-white text-xs px-2 py-1 rounded-md hover:bg-blue-600 transition mr-2"
            >
           Edit
         </button>
         <button
+            v-if="canDeleteNotes"
             @click="deleteNote"
             class="bg-red-500 text-white text-xs px-2 py-1 rounded-md hover:bg-red-600 transition"
            >
@@ -48,6 +50,8 @@
 </template>
 
 <script>
+import { usePermissions } from '../../composables/usePermissions';
+
 export default {
   name: 'NoteItem',
   props: {
@@ -55,6 +59,10 @@ export default {
       type: Object,
       required: true
     }
+  },
+  setup() {
+    const { canUpdateNotes, canDeleteNotes } = usePermissions();
+    return { canUpdateNotes, canDeleteNotes };
   },
   data() {
     return {

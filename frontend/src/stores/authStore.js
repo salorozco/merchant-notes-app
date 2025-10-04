@@ -8,6 +8,12 @@ export const useAuthStore = defineStore('auth', {
         isLoading: false,
     }),
 
+    getters: {
+        isAuthenticated: (state) => !!state.user,
+        userRoles: (state) => state.user?.roles || [],
+        userPermissions: (state) => state.user?.permissions || [],
+    },
+
     actions: {
         async login(email, password) {
             this.isLoading = true;
@@ -48,6 +54,14 @@ export const useAuthStore = defineStore('auth', {
             } finally {
                 this.isLoading = false;
             }
+        },
+
+        hasPermission(permission) {
+            return this.userPermissions.includes(permission);
+        },
+
+        hasRole(role) {
+            return this.userRoles.includes(role);
         },
     },
 
