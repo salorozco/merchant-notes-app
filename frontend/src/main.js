@@ -5,6 +5,7 @@ import './assets/main.css';
 
 import App from './App.vue'
 import router from './router'
+import { vPermission, vRole } from './directives/permissions';
 
 const app = createApp(App)
 
@@ -13,5 +14,9 @@ pinia.use(piniaPluginPersistedstate);
 
 app.use(pinia);
 app.use(router)
+
+// Register permission directives globally
+app.directive('permission', vPermission);
+app.directive('role', vRole);
 
 app.mount('#app')

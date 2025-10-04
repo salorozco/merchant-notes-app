@@ -18,6 +18,8 @@ class UserResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'email' => $this->email,
+            'roles' => $this->roles->pluck('name'),
+            'permissions' => $this->getAllPermissions()->pluck('name'),
             'merchants' => MerchantResource::collection(
                 $this->merchants->each->setRelation('parentUser', true)
             ),

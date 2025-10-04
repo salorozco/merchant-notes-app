@@ -51,6 +51,69 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the roles that belong to the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    /**
+     * Check if user has a specific role.
+     *
+     * @param string $roleName
+     * @return bool
+     */
+    public function hasRole(string $roleName): bool
+    {
+        return $this->roles()->where('name', $roleName)->exists();
+    }
+
+    /**
+     * Check if user has any of the given roles.
+     *
+     * @param array $roles
+     * @return bool
+     */
+    public function hasAnyRole(array $roles): bool
+    {
+        return $this->roles()->whereIn('name', $roles)->exists();
+    }
+
+    /**
+     * Check if user has a specific permission.
+     *
+     * @param string $permissionName
+     * @return bool
+     */
+    public function hasPermission(string $permissionName): bool
+    {
+        return $this->roles()
+            ->with('permissions')
+            ->get()
+            ->pluck('permissions')
+            ->flatten()
+            ->contains('name', $permissionName);
+    }
+
+    /**
+     * Get all permissions for the user through their roles.
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getAllPermissions()
+    {
+        return $this->roles()
+            ->with('permissions')
+            ->get()
+            ->pluck('permissions')
+            ->flatten()
+            ->unique('id');
+    }
+
+    /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>

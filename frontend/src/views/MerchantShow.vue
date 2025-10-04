@@ -18,6 +18,7 @@
           <div class="flex items-center justify-between mt-8 mb-4">
             <h2 class="text-lg font-semibold">Notes</h2>
             <button
+                v-if="canCreateNotes"
                 @click="showForm = !showForm"
                 class="bg-blue-500 text-white text-xs px-3 py-1 rounded-md hover:bg-blue-600 transition"
             >
@@ -26,7 +27,7 @@
           </div>
 
           <!-- Add Note Form -->
-          <div v-if="showForm" class="mb-6">
+          <div v-if="showForm && canCreateNotes" class="mb-6">
             <textarea
                 v-model="newNoteBody"
                 rows="3"
@@ -52,6 +53,7 @@
 
 <script>
 import { useMerchantStore } from "../stores/merchantStore";
+import { usePermissions } from "../composables/usePermissions";
 import NoteList from "../components/notes/NoteList.vue";
 import MerchantItem from "../components/merchants/MerchantItem.vue";
 
@@ -60,6 +62,10 @@ export default {
   components: {
     MerchantItem,
     NoteList
+  },
+  setup() {
+    const { canCreateNotes } = usePermissions();
+    return { canCreateNotes };
   },
   data() {
     return {
